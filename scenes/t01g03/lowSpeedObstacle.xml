@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<yaf> 
+	
+    <globals background="0 0 0 1" ambient="0 0 0 1" /> 
+
+
+    <cameras initial="cam1" > 
+        <perspective id="cam5" 
+            angle="60" 
+            near="0.1" 
+            far="1000" 
+            location="15 15 15" 
+            target="0 0.0 0" /> 
+ 
+    </cameras> 
+
+    <skybox size="250 250 250" center="0 0 0" emissive="1 1 1 1.0" intensity="0.25" up="scenes/t01g03/textures/dark_ghost_skybox.jpg" down="scenes/t01g03/textures/dark_ghost_skybox.jpg" left="scenes/t01g03/textures/dark_ghost_skybox.jpg" right="scenes/t01g03/textures/dark_ghost_skybox.jpg" front="scenes/t01g03/textures/dark_ghost_skybox.jpg" back="scenes/t01g03/textures/dark_ghost_skybox.jpg"/>
+
+    
+    <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas --> 
+    <textures>        
+
+    </textures> 
+
+    <materials> 
+
+        <material id="floorColor" 
+            emissive="0 0 0 1" 
+            color="0.07 0.26 0.35 1.0" 
+            specular="0.09 0.22 0.30 1" 
+            shininess="30"  
+            twosided = "false" />
+
+        <material id="red" 
+            emissive="0.0 0.0 0.0 1" 
+            color="1 0 0 1.0"  
+            specular="0 0 0 0" 
+            shininess="0"
+            twosided = "true"/>
+
+        <material id="black_transparent" 
+            emissive="0.0 0.0 0.0 1" 
+            color="0.1 0.1 0.1 1.0"  
+            specular="0 0 0 0" 
+            shininess="0"
+            twosided = "true"/>
+
+			
+    </materials> 
+
+    <graph rootid="lowSpeedObstacle"> 
+		
+		<node id="lowSpeedObstacle" castshadows = "true" receiveshadows="true"> 
+            <children> 
+                <noderef id="obstacle" />
+            </children> 
+        </node>
+
+        <node id="rectangle1_obst"> 
+
+            <transforms>
+				<translate value3="0 0 -0.5" />
+				<rotate value3="0 180.0 0.0" />
+            </transforms> 
+
+            <children>   
+                <primitive>          
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" />
+                </primitive> 
+            </children> 
+        </node>
+		
+		<node id="rectangle2_obst"> 
+
+            <transforms>
+				<translate value3="0 0 0.5" />
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" /> 
+                </primitive>
+            </children> 
+        </node>
+		
+		<node id="rectangle3_obst"> 
+
+            <transforms>
+				<translate value3="0 -0.5 0" />
+				<rotate value3="90 0.0 0.0" />
+            </transforms> 
+
+            <children>   
+                <primitive>          
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" /> 
+                </primitive>
+            </children> 
+        </node>
+		
+		<node id="rectangle4_obst"> 
+
+            <transforms>
+				<translate value3="0 0.5 0" />
+				<rotate value3="-90 0.0 0.0" />
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" /> 
+                </primitive>
+            </children> 
+        </node>
+		
+		<node id="rectangle5_obst"> 
+
+            <transforms>
+				<translate value3="-0.5 0 0" />
+				<rotate value3="0.0 -90.0 0.0" />
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" /> 
+                </primitive>
+            </children> 
+        </node>
+		
+		<node id="rectangle6_obst"> 
+            <transforms>
+				<translate value3="0.5 0 0" />
+				<rotate value3="0.0 90.0 0.0" />
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" /> 
+                </primitive>
+            </children> 
+        </node>
+		
+		<node id="unitCube_obst">
+            <children>            
+				<!-- Back -->
+                <noderef id="rectangle1_obst" /> 
+				<!-- Front -->
+				<noderef id="rectangle2_obst" /> 
+				<!-- Bottom -->
+				<noderef id="rectangle3_obst" />
+				<!-- Top -->
+				<noderef id="rectangle4_obst" />
+				<!-- Left -->				
+				<noderef id="rectangle5_obst" />
+				 <!-- Right -->
+				<noderef id="rectangle6_obst" />
+            </children> 
+        </node>
+
+        <node id="obstacle">
+			<transforms>
+				<translate value3="-1 1 -41" />
+                <scale value3="1.1 0.55 0.50" />
+            </transforms>
+
+            <materialref id="red" /> 
+
+            <children>    
+               <noderef id="unitCube_obst" />
+            </children> 
+        </node>
+
+    </graph> 
+</yaf> 

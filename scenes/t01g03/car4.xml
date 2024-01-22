@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<yaf> 
+
+    <globals background="0 0 0 1" ambient="00 00 00 1" /> 
+
+    <fog color="1.0 1.0 1.0 1.0" near="0.0" far="175.0" />
+
+    <cameras initial="cam1" > 
+        <perspective id="cam1" 
+            angle="60" 
+            near="0.1" 
+            far="1000" 
+            location="15 15 15" 
+            target="0 0.0 0" /> 
+
+        <orthogonal id="cam2" 
+            near="0.1" 
+            far="1000" 
+            location="0 15 0" 
+            target="0.0 0.0 0.0" 
+            left="-5" 
+            right="5" 
+            bottom="-5" 
+            top="5" /> 
+    </cameras> 
+
+    <skybox size="250 250 250" center="0 0 0" emissive="1.0 1.0 1.0 1.0" intensity="0.250" up="scenes/t01g03/textures/ghost_skybox.jpg" down="scenes/t01g03/textures/ghost_skybox.jpg" left="scenes/t01g03/textures/ghost_skybox.jpg" right="scenes/t01g03/textures/ghost_skybox.jpg" front="scenes/t01g03/textures/ghost_skybox.jpg" back="scenes/t01g03/textures/ghost_skybox.jpg"/>
+
+    <textures>        
+		<texture id="weelTex2" filepath="scenes/t01g03/textures/weel4.jpg" />
+        <texture id="wagonSideTex" filepath="scenes/t01g03/textures/wagon_texture.jpg"/>
+        <texture id="wagonFrontTex" filepath="scenes/t01g03/textures/front_wagon.jpg"/>
+        <texture id="wagonBackTex" filepath="scenes/t01g03/textures/back_wagon.jpg"/>
+        <texture id="woodTex" filepath="scenes/t01g03/textures/wood2.jpg"/>
+     
+
+    </textures> 
+
+    <materials> 
+
+        <material id="weelApp" 
+            emissive="0.0 0.0 0.0 1" 
+            color="0.7 0.45 0.33 1"  
+            specular="0.2 0.2 0.2 0" 
+            shininess="100" 
+            textureref="weelTex2" 
+            texlength_s="1" 
+            texlength_t="1" 
+            twosided = "false" />
+
+        <material id="sideApp" 
+            emissive="0.0 0.0 0.0 1" 
+            color="0.7 0.45 0.33 1"  
+            specular="0 0 0 0" 
+            shininess="20" 
+            textureref="wagonSideTex" 
+            texlength_s="1" 
+            texlength_t="1" 
+            twosided = "false" />
+
+        <material id="frontApp" 
+            emissive="0.0 0.0 0.0 1" 
+            color="0.7 0.45 0.33 1"  
+            specular="0 0 0 0" 
+            shininess="20" 
+            textureref="wagonFrontTex" 
+            texlength_s="1" 
+            texlength_t="1" 
+            twosided = "false" />
+
+        <material id="backApp" 
+            emissive="0.0 0.0 0.0 1" 
+            color="0.7 0.45 0.33 1"  
+            specular="0 0 0 0" 
+            shininess="20" 
+            textureref="wagonBackTex" 
+            texlength_s="1" 
+            texlength_t="1" 
+            twosided = "false" />
+
+        <material id="woodApp" 
+            emissive="0.0 0.0 0.0 1" 
+            color="0.7 0.45 0.33 1"  
+            specular="0 0 0 0" 
+            shininess="20" 
+            textureref="woodTex" 
+            texlength_s="1" 
+            texlength_t="1" 
+            twosided = "false" />
+
+        <material id="lightApp"
+            emissive="0.02 0.95 0.25 1" 
+            color="0.02 0.95 0.25 1"  
+            specular="0 0 0 0" 
+            shininess="100" 
+            twosided = "false" />
+
+
+    </materials> 
+
+    <graph rootid="vehicle"> 
+		<node id="vehicle" castshadows = "true" receiveshadows="true"> 
+            <children> 
+                <noderef id="car" />
+            </children> 
+        </node>
+
+        <node id="rectangle1"> 
+
+            <transforms>
+				<translate value3="0 0 -0.5" />
+				<rotate value3="0 180.0 0.0" />
+            </transforms> 
+
+            <children>   
+                <primitive>          
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" />
+                </primitive> 
+            </children> 
+        </node>
+		
+		<node id="rectangle2"> 
+
+            <transforms>
+				<translate value3="0 0 0.5" />
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" /> 
+                </primitive>
+            </children> 
+        </node>
+		
+		<node id="rectangle3"> 
+
+            <transforms>
+				<translate value3="0 -0.5 0" />
+				<rotate value3="90 0.0 0.0" />
+            </transforms> 
+
+            <children>   
+                <primitive>          
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" /> 
+                </primitive>
+            </children> 
+        </node>
+		
+		<node id="rectangle4"> 
+
+            <transforms>
+				<translate value3="0 0.5 0" />
+				<rotate value3="-90 0 90" />
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" /> 
+                </primitive>
+            </children> 
+        </node>
+		
+		<node id="rectangle5"> 
+
+            <transforms>
+				<translate value3="-0.5 0 0" />
+				<rotate value3="0.0 -90.0 0.0" />
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" /> 
+                </primitive>
+            </children> 
+        </node>
+		
+		<node id="rectangle6"> 
+            <transforms>
+				<translate value3="0.5 0 0" />
+				<rotate value3="0.0 90.0 0.0" />
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" /> 
+                </primitive>
+            </children> 
+        </node>
+		
+		<node id="unitCube">
+            <children>            
+				<!-- Back -->
+                <noderef id="rectangle1" /> 
+				<!-- Front -->
+				<noderef id="rectangle2" /> 
+				<!-- Bottom -->
+				<noderef id="rectangle3" />
+				<!-- Top -->
+				<noderef id="rectangle4" />
+				<!-- Left -->				
+				<noderef id="rectangle5" />
+				 <!-- Right -->
+				<noderef id="rectangle6" />
+            </children> 
+        </node>
+
+        <node id="back_weel_1">
+			<transforms>
+				<translate value3="0.5 -0.2 0" />
+                <rotate value3="0 0 90"/>
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <cylinder base="0.4" top="0.4" height="0.1" slices="20" stacks="10" capsclose="true"/>
+                </primitive>
+            </children> 
+        </node>
+
+        <node id="back_weel_2">
+			<transforms>
+				<translate value3="-0.5 -0.2 0" />
+                <rotate value3="0 0 90"/>
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <cylinder base="0.4" top="0.4" height="0.1" slices="20" stacks="10" capsclose="true"/>
+                </primitive>
+            </children> 
+        </node>
+
+        <node id="back_weels">
+			<transforms>
+				<translate value3="0 0 -0.6" />
+            </transforms> 
+
+            <children>             
+                <noderef id="back_weel_1" />
+                <noderef id="back_weel_2" />
+            </children> 
+        </node>
+
+
+        <node id="front_weel_1">
+			<transforms>
+				<translate value3="0.5 -0.2 0" />
+                <rotate value3="0 0 90"/>
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <cylinder base="0.4" top="0.4" height="0.1" slices="20" stacks="10" capsclose="true"/>
+                </primitive>
+            </children> 
+        </node>
+
+        <node id="front_weel_2">
+			<transforms>
+				<translate value3="-0.5 -0.2 0" />
+                <rotate value3="0 0 90"/>
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <cylinder base="0.4" top="0.4" height="0.1" slices="20" stacks="10" capsclose="true"/>
+                </primitive>
+            </children> 
+        </node>
+
+        <node id="front_weels">
+			<transforms>
+				<translate value3="0 0 0.5" />
+            </transforms> 
+
+            <children>             
+                <noderef id="front_weel_1" />
+                <noderef id="front_weel_2" />
+            </children> 
+        </node>
+
+        <node id="weels">
+            <materialref id="weelApp" />
+
+            <children>             
+                <noderef id="front_weels" />
+                <noderef id="back_weels" />
+            </children> 
+        </node>
+
+        <node id="side_body">
+			<transforms>
+				<scale value3="1 1.2 1" /> 
+            </transforms> 
+
+            <materialref id="sideApp" />
+
+            <children>             
+                <noderef id="unitCube" />
+            </children> 
+        </node>
+
+        
+
+        <node id="front">
+
+            <transforms>
+                <rotate value3="0 0 0"/>               
+				<translate value3="0 0 0.51" />
+                <scale value3="1 1.2 1" />
+            </transforms> 
+
+            <materialref id="frontApp" />
+
+
+            <children>             
+                 <primitive>
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" />
+                </primitive>
+            </children> 
+        </node>
+
+        <node id="back">
+
+            <transforms>
+                <rotate value3="0 -180 0"/>               
+				<translate value3="0 0 -0.51" />
+                <scale value3="1 1.2 1" />
+            </transforms> 
+
+            <materialref id="backApp" />
+
+
+            <children>             
+                 <primitive>
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" />
+                </primitive>
+            </children> 
+        </node>
+
+        <node id="pole">
+			<transforms>
+                <translate value3="0 0 -0.125"/>
+				<scale value3="0.1 0.1 0.25" />
+            </transforms> 
+
+            <materialref id="woodApp" />
+
+            <children>             
+                <noderef id="unitCube" />
+            </children> 
+        </node>
+
+        <node id="lamp">
+			<transforms>
+                <translate value3="0 -0.2 0"/>
+				<scale value3="0.2 0.3 0.1" />
+            </transforms> 
+
+            <materialref id="lightApp" />
+
+            <children>             
+                <noderef id="unitCube" />
+            </children> 
+        </node>
+
+
+
+        <node id="light_pole">
+            <transforms>
+				<translate value3="0 0.6 0.7" />     
+            </transforms>
+
+            <children>             
+                <noderef id="pole" />
+                <noderef id="lamp" />
+
+            </children> 
+
+        </node>
+
+        <node id="roof">
+            <transforms>
+				<translate value3="0 0.65 0" />
+				<scale value3="1 1 2" />      
+
+            </transforms>
+
+            <materialref id="roofApp" />
+
+            <children>             
+                <noderef id="side_body" />
+                <noderef id="front" />
+                <noderef id="back" />
+                <noderef id="light_pole"/>
+
+
+            </children> 
+        </node>
+
+
+        <node id="body">
+			<transforms>
+                <translate value3="0 0 0.25"/>
+				<scale value3="1 0.1 2.5" />
+            </transforms> 
+
+            <materialref id="woodApp" />
+
+            <children>             
+                <noderef id="unitCube" />
+            </children> 
+        </node>
+
+
+
+        <node id="car">
+
+            <transforms>
+				<translate value3="0 0.1 0" />
+				<scale value3="0.7 0.7 0.7" />
+            </transforms> 
+
+            <children>             
+                <noderef id="body" />
+                <noderef id="roof" />
+                <noderef id="weels" />
+            </children> 
+        </node>
+		
+		
+    </graph> 
+</yaf> 

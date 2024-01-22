@@ -1,0 +1,493 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>SGI Hello world TP1</title>
+    <style>
+      body { margin: 0; overflow: hidden; }
+
+      #timeDisplay {
+        position: absolute;
+        top: 50px;
+        left: 15px;
+        color: black;
+        font-size: 18px;
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        /* Add any additional styles you want */
+        padding: 10px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 1.3em;
+      }
+
+      #lapDisplay {
+        display: none;
+        position: fixed;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 30px;
+        align-items: center;
+        color: black;
+        box-sizing: border-box;
+        padding: 15px 30px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 2em;
+        background-color: rgba(138, 43, 226, 0.6); /* Use rgba for transparency */
+        border-radius: 10px; /* Adjust the radius as needed for rounded corners */
+      }
+
+
+      #countdown_container {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 30px;
+        width: 25em;
+        height: 25em;
+        flex-direction: column; /* Stack items vertically */
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(98, 19, 114, 0.6); /* Black with 80% opacity */
+        color: antiquewhite;
+      }
+
+      #obstaclePicker, #gameOverBoard {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 30px 60px;
+        flex-direction: column; /* Stack items vertically */
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.8); /* Black with 80% opacity */
+        color: antiquewhite;
+      }
+
+      #playerNameBoard {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 170px 120px;
+        display: none;
+        flex-direction: column; /* Stack items vertically */
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.85); /* Black with 80% opacity */
+        color: antiquewhite;
+        border-radius: 50%; /* Make it a circle */
+      }
+      #lapsBoard {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 135px 100px;
+        display: none;
+        flex-direction: column; /* Stack items vertically */
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.85); /* Black with 80% opacity */
+        color: antiquewhite;
+        border-radius: 50%; /* Make it a circle */
+      }
+      #lapsBoardTitle, #gameOverBoardTitle, #playerNameTitle {
+        font-family: sans-serif;
+        margin-bottom: 20px; /* Add some spacing between title and options */
+      }
+      #carOptionsContainer2, #obstacleOptionsContainer {
+        display: none;
+        justify-content: space-around;
+        align-items: center;
+      }
+      #carOptionsContainer, #gameOverOptionsContainer {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+      .obstacleOption {
+        cursor: pointer;
+        transition: transform 0.2s;
+        padding: 30px;
+        color: antiquewhite;
+      }
+      .obstacleOption:hover {
+        transform: scale(1.1);
+      }
+      .carOption, .optionElem {
+        cursor: pointer;
+        transition: transform 0.2s;
+        padding: 30px;
+        color: antiquewhite;
+      }
+
+      .optionElem {
+        cursor: pointer;
+        transition: transform 0.2s;
+        padding: 10px 30px;
+        color: antiquewhite;
+      }
+      .carOption:hover, .optionElem:hover {
+        transform: scale(1.1);
+      }
+      .unselectableCar {
+        opacity: 0.5;  /* Adjust opacity to visually indicate the car cannot be selected */
+        /* Add any other styles you want for unselectable cars */
+      }
+      .unselectableCar:hover {
+        transform: scale(1);
+      }
+
+
+      #superSpeedPicker {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 30px;
+        width: 500px; 
+        height: 300px; 
+        text-align: center;
+        color: antiquewhite;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, 0.8);
+        overflow: hidden;
+      }
+      /* Set background image */
+      #superSpeedPicker::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('./scenes/t01g03/textures/powerUp.jpg') center center/cover;
+        opacity: 0.3;
+        border-radius: 10px;
+        z-index: -1;
+      }
+      #superSpeedTitle {
+        font-family: sans-serif;
+        font-size: 24px;
+        margin-bottom: 15px;
+      }
+      #timeInput, #lapsInput, #playerNameInput {
+        font-size: 18px;
+        width: calc(100% - 20px); /* Adjust width to allow for padding */
+        box-sizing: border-box;
+        resize: none;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      #winnerImg{
+        padding: 20px;
+      }
+      #goBTN, #nextBTN, #playAgainBTN, #playerNameBTN {
+          background-color: #4CAF50;
+          color: white;
+          font-size: 16px;
+          padding: 10px 15px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+      }
+      #goBTN:hover, #nextBTN:hover, #playAgainBTN:hover {
+          background-color: #45a049;
+      }
+
+      #ghostPowerAlert {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 30px;
+        width: 500px;
+        height: 300px; 
+        text-align: center;
+        color: antiquewhite;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background-color: rgba(138, 77, 113, 0.1);
+        overflow: hidden;
+      }
+      /* Set background image */
+      #ghostPowerAlert::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('./scenes/t01g03/textures/ghost.jpg') center center/cover;
+        opacity: 0.1;
+        border-radius: 10px;
+        z-index: -1;
+      }
+
+      #lowSpeedAlert {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 30px;
+        width: 500px;
+        height: 300px; 
+        text-align: center;
+        color: antiquewhite;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background-color: rgba(138, 77, 113, 0.1);
+        overflow: hidden;
+      }
+      /* Set background image */
+      #lowSpeedAlert::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('./scenes/t01g03/textures/signal.jpg') center center/cover;
+        opacity: 0.2;
+        border-radius: 10px;
+        z-index: -1;
+      }
+
+      #darkDriveAlert {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 30px;
+        width: 500px;
+        height: 300px; 
+        text-align: center;
+        color: antiquewhite;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background-color: rgba(138, 77, 113, 0.1);
+        overflow: hidden;
+      }
+      /* Set background image */
+      #darkDriveAlert::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('./scenes/t01g03/textures/energy.jpg') center center/cover;
+        opacity: 0.2;
+        border-radius: 10px;
+        z-index: -1;
+      }
+
+      #title {
+        font-family: sans-serif;
+        font-size: 22px;
+        width: 100%; /* Make the textarea fill the parent container */
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        resize: none; /* Disable textarea resizing */
+        /* Add any additional styles you want */
+        padding: 10px;
+        position: fixed;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      #countdown {
+        font-size: 15em;
+        color: rgb(243, 219, 244);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      }
+
+      #chooseObstTitle, #obstaclePickerTitle, #carPickerTitle, #autoCarPickerTitle {
+        display: none;
+        position: fixed;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 30px;
+        width: 90%;
+        text-align: center;
+        color: rgb(231, 220, 241);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background-color: rgba(109, 61, 151, 0.651);
+        overflow: hidden;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 2.5em;
+      }
+      
+      #afterChooseObstTitle {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 30px;
+        text-align: center;
+        color: rgb(231, 220, 241);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background-color: rgba(109, 61, 151, 0.489);
+        overflow: hidden;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 4em;
+      }
+
+    </style>
+
+    <link rel="shortcut icon" href="image/favicon/3d.png" />
+    <link rel="stylesheet" href="styles.css">
+
+    <script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.156.1/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.156.1/examples/jsm/"
+      }
+    }
+    </script>
+
+
+
+</head>
+
+<body>
+  <div id="canvas"></div>
+  <div id="camera"></div>
+  <script type="module" src="main.js"></script>
+
+  <div id="overlay">
+    <textarea id="userInput" rows="1" cols="3"></textarea>
+  </div>
+
+  <div id="superSpeedPicker">
+    <h2 id="superSpeedTitle">Enter the lifetime of super speed:</h2>
+    <h4>(1 to 30)</h4>
+    <input type="number" id="timeInput" min="1" max="30" />
+    <button id="goBTN" onclick="validateInput()">GO!</button>
+    <p id="errorText" style="color: red; display: none;">Please enter a valid number between 1 and 30.</p>
+  </div>
+
+  <script>
+    function validateInput() {
+        var inputElement = document.getElementById('timeInput');
+        var errorTextElement = document.getElementById('errorText');
+
+        var enteredValue = parseInt(inputElement.value);
+
+        if (!isNaN(enteredValue) && enteredValue >= 1 && enteredValue <= 30) {
+            // Valid input, proceed with your logic
+            errorTextElement.style.display = 'none';
+            // ... (your code)
+        } else {
+            // Invalid input, show error message
+            errorTextElement.style.display = 'block';
+        }
+    }
+  </script>
+
+  <div id="ghostPowerAlert">
+    <h2 id="title">You now have the power of ghosts <br/> for 10 seconds!</h2>
+  </div>
+
+  <div id="lowSpeedAlert">
+    <h2 id="title">Speeding Penalty: for 5 seconds <br/> you cannot exceed the speed limit </h2>
+  </div>
+
+  <div id="darkDriveAlert">
+    <h2 id="title">The lights are off <br/> for 5 seconds!</h2>
+  </div>
+
+  <div id="timeDisplay"></div>
+  <div id="lapDisplay"></div>
+
+  <div id="obstaclePickerTitle">Choose an obstacle to add</div>
+  <div id="chooseObstTitle" >Choose a point to place the obstacle</div>
+  <div id="afterChooseObstTitle" >Good Choice!</div>
+  <h2 id="autoCarPickerTitle">Choose your rival</h2>
+  <h2 id="carPickerTitle">Choose your Car</h2>
+
+
+  <div id="countdown_container">
+    <div id="countdown"></div>
+  </div>
+
+  <div id="gameOverBoard">
+    <h2 id="gameOverBoardTitle">Choose an Option</h2>
+    <div id="winnerImg"></div>
+    <button id="playAgainBTN" onclick="window.location.reload();">Play Again</button>
+  </div>
+
+  <div id="lapsBoard">
+    <h2 id="lapsBoardTitle">Enter the number of Laps:</h2>
+    <h4>(1 to 10)</h4>
+    <input type="number" id="lapsInput" min="1" max="10" />
+    <button id="nextBTN" onclick="validateLapsInput()">NEXT</button>
+    <p id="lapsErrorText" style="color: red; display: none; position: absolute; margin-top: 60%;">Please enter a valid number between 1 and 10.</p>
+  </div>
+
+  <script>
+    function validateLapsInput() {
+        var inputElement = document.getElementById('lapsInput');
+        var errorTextElement = document.getElementById('lapsErrorText');
+
+        var enteredValue = parseInt(inputElement.value);
+
+        if (!isNaN(enteredValue) && enteredValue >= 1 && enteredValue <= 10) {
+            errorTextElement.style.display = 'none';
+        } else {
+            // Invalid input, show error message
+            errorTextElement.style.display = 'block';
+        }
+    }
+  </script>
+
+<div id="playerNameBoard">
+  <h2 id="playerNameTitle">Enter the Player name:</h2>
+  <input type="text" id="playerNameInput" />
+  <button id="playerNameBTN" onclick="validateplayerNameInput()">NEXT</button>
+  <p id="playerNameErrorText" style="color: red; display: none; position: absolute; margin-top: 45%;">Player name must have between 4 and 8 characters.</p>
+</div>
+
+<script>
+  function validateplayerNameInput() {
+      var inputElement = document.getElementById('playerNameInput');
+      var errorTextElement = document.getElementById('playerNameErrorText');
+
+      var enteredValue = inputElement.value;
+
+      if ( enteredValue.length <= 8 && enteredValue.length >= 4) {
+          errorTextElement.style.display = 'none';
+      } else {
+          // Invalid input, show error message
+          errorTextElement.style.display = 'block';
+      }
+  }
+</script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<yaf> 
+
+    <globals background="0 0 0 1" ambient="00 00 00 1" /> 
+
+    <fog color="1.0 1.0 1.0 1.0" near="0.0" far="175.0" />
+
+    <cameras initial="cam1" > 
+        <perspective id="cam1" 
+            angle="60" 
+            near="0.1" 
+            far="1000" 
+            location="15 15 15" 
+            target="0 0.0 0" /> 
+
+        <orthogonal id="cam2" 
+            near="0.1" 
+            far="1000" 
+            location="0 15 0" 
+            target="0.0 0.0 0.0" 
+            left="-5" 
+            right="5" 
+            bottom="-5" 
+            top="5" /> 
+    </cameras> 
+
+    <skybox size="250 250 250" center="0 0 0" emissive="1.0 1.0 1.0 1.0" intensity="0.250" up="scenes/t01g03/textures/ghost_skybox.jpg" down="scenes/t01g03/textures/ghost_skybox.jpg" left="scenes/t01g03/textures/ghost_skybox.jpg" right="scenes/t01g03/textures/ghost_skybox.jpg" front="scenes/t01g03/textures/ghost_skybox.jpg" back="scenes/t01g03/textures/ghost_skybox.jpg"/>
+
+    <textures>        
+		<texture id="start_trackTex" filepath="scenes/t01g03/textures/start.jpg" />
+		<texture id="weelTex" filepath="scenes/t01g03/textures/weel3.jpg" />
+		<texture id="glassTex" filepath="scenes/t01g03/textures/glass3.png" />
+    </textures> 
+
+    <materials> 
+
+        <material id="start_trackApp" 
+            emissive="0.0 0.0 0.0 1" 
+            color="1.0 1.0 1.0 1.0"  
+            specular="0 0 0 0" 
+            shininess="100" 
+            textureref="start_trackTex" 
+            texlength_s="1" 
+            texlength_t="1" 
+            twosided = "false" />
+
+        <material id="weelApp" 
+            emissive="0.0 0.0 0.0 1" 
+            color="0.3 0.3 0.3 1"  
+            specular="0 0 0 0" 
+            shininess="100" 
+            textureref="weelTex" 
+            texlength_s="1" 
+            texlength_t="1" 
+            twosided = "false" />
+
+        <material id="glassApp" 
+            emissive="0.0 0.0 0.0 1" 
+            color="0.3 0.3 0.3 1"  
+            specular="0 0 0 0" 
+            shininess="100" 
+            textureref="glassTex" 
+            texlength_s="1" 
+            texlength_t="1" 
+            twosided = "false" />
+
+        <material id="bodyApp" 
+            emissive="0.0 0.0 0.0 1.0" 
+            color="0 0 0 1.0" 
+            specular="0.05 0.05 0.05 1" 
+            shininess="30"  
+            twosided = "false" />
+
+        <material id="roofApp" 
+            emissive="0 0 0 1" 
+            color="0 0 0 1.0" 
+            specular="0.1 0.1 0.1 1" 
+            shininess="30"  
+            twosided = "false" />
+
+    </materials> 
+
+    <graph rootid="vehicle"> 
+		<node id="vehicle" castshadows = "true" receiveshadows="true"> 
+            <children> 
+                <noderef id="car" />
+            </children> 
+        </node>
+
+        <node id="rectangle1"> 
+
+            <transforms>
+				<translate value3="0 0 -0.5" />
+				<rotate value3="0 180.0 0.0" />
+            </transforms> 
+
+            <children>   
+                <primitive>          
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" />
+                </primitive> 
+            </children> 
+        </node>
+		
+		<node id="rectangle2"> 
+
+            <transforms>
+				<translate value3="0 0 0.5" />
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" /> 
+                </primitive>
+            </children> 
+        </node>
+		
+		<node id="rectangle3"> 
+
+            <transforms>
+				<translate value3="0 -0.5 0" />
+				<rotate value3="90 0.0 0.0" />
+            </transforms> 
+
+            <children>   
+                <primitive>          
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" /> 
+                </primitive>
+            </children> 
+        </node>
+		
+		<node id="rectangle4"> 
+
+            <transforms>
+				<translate value3="0 0.5 0" />
+				<rotate value3="-90 0.0 0.0" />
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" /> 
+                </primitive>
+            </children> 
+        </node>
+		
+		<node id="rectangle5"> 
+
+            <transforms>
+				<translate value3="-0.5 0 0" />
+				<rotate value3="0.0 -90.0 0.0" />
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" /> 
+                </primitive>
+            </children> 
+        </node>
+		
+		<node id="rectangle6"> 
+            <transforms>
+				<translate value3="0.5 0 0" />
+				<rotate value3="0.0 90.0 0.0" />
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" /> 
+                </primitive>
+            </children> 
+        </node>
+		
+		<node id="unitCube">
+            <children>            
+				<!-- Back -->
+                <noderef id="rectangle1" /> 
+				<!-- Front -->
+				<noderef id="rectangle2" /> 
+				<!-- Bottom -->
+				<noderef id="rectangle3" />
+				<!-- Top -->
+				<noderef id="rectangle4" />
+				<!-- Left -->				
+				<noderef id="rectangle5" />
+				 <!-- Right -->
+				<noderef id="rectangle6" />
+            </children> 
+        </node>
+
+        <node id="back_weel_1">
+			<transforms>
+				<translate value3="0.45 -0.2 0" />
+                <rotate value3="0 0 90"/>
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <cylinder base="0.2" top="0.2" height="0.15" slices="20" stacks="10" capsclose="true"/>
+                </primitive>
+            </children> 
+        </node>
+
+        <node id="back_weel_2">
+			<transforms>
+				<translate value3="-0.45 -0.2 0" />
+                <rotate value3="0 0 90"/>
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <cylinder base="0.2" top="0.2" height="0.15" slices="20" stacks="10" capsclose="true"/>
+                </primitive>
+            </children> 
+        </node>
+
+        <node id="back_weels">
+			<transforms>
+				<translate value3="0 0 -0.6" />
+            </transforms> 
+
+            <children>             
+                <noderef id="back_weel_1" />
+                <noderef id="back_weel_2" />
+            </children> 
+        </node>
+
+
+        <node id="front_weel_1">
+			<transforms>
+				<translate value3="0.45 -0.2 0" />
+                <rotate value3="0 0 90"/>
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <cylinder base="0.2" top="0.2" height="0.15" slices="20" stacks="10" capsclose="true"/>
+                </primitive>
+            </children> 
+        </node>
+
+        <node id="front_weel_2">
+			<transforms>
+				<translate value3="-0.45 -0.2 0" />
+                <rotate value3="0 0 90"/>
+            </transforms> 
+
+            <children>             
+                <primitive>
+                    <cylinder base="0.2" top="0.2" height="0.15" slices="20" stacks="10" capsclose="true"/>
+                </primitive>
+            </children> 
+        </node>
+
+        <node id="front_weels">
+			<transforms>
+				<translate value3="0 0 0.5" />
+            </transforms> 
+
+            <children>             
+                <noderef id="front_weel_1" />
+                <noderef id="front_weel_2" />
+            </children> 
+        </node>
+
+        <node id="weels">
+            <materialref id="weelApp" />
+
+            <children>             
+                <noderef id="front_weels" />
+                <noderef id="back_weels" />
+            </children> 
+        </node>
+
+        <node id="middle_roof">
+			<transforms>
+				<scale value3="0.85 0.3 1" />
+				<translate value3="0 0.3 -0.2" />
+            </transforms> 
+
+            <children>             
+                <noderef id="unitCube" />
+            </children> 
+        </node>
+
+        <node id="front_roof">
+
+            <transforms>
+                <rotate value3="145 0 90"/>
+				<scale value3="1 0.85 1" />                
+				<translate value3="0 0.2 0.32" />
+            </transforms> 
+
+            <children>             
+                 <primitive>
+                    <cylinder base="0.25" top="0.25" height="1" slices="3" stacks="5" capsclose="true"/>
+                </primitive>
+            </children> 
+        </node>
+
+        <node id="back_roof">
+
+            <transforms>
+                <rotate value3="175 0 90"/>
+				<scale value3="1 0.85 1" />                
+				<translate value3="0 0.19 -0.82" />
+            </transforms> 
+
+            <children>             
+                 <primitive>
+                    <cylinder base="0.29" top="0.29" height="1" slices="3" stacks="5" capsclose="true"/>
+                </primitive>
+            </children> 
+        </node>
+
+        <node id="glass">
+
+            <transforms>
+                <rotate value3="-35 0 0"/>
+				<scale value3="0.85 0.35 1" />                
+				<translate value3="0 0.31 0.4" />
+            </transforms> 
+
+            <materialref id="glassApp" />
+
+
+            <children>             
+                 <primitive>
+                    <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" />
+                </primitive>
+            </children> 
+        </node>
+
+        <node id="roof">
+            <transforms>
+				<translate value3="0 0 0.1" />
+				<scale value3="0.9 1 1" />                
+
+            </transforms>
+
+            <materialref id="roofApp" />
+
+            <children>             
+                <noderef id="middle_roof" />
+                <noderef id="front_roof" />
+                <noderef id="back_roof" />
+                <noderef id="glass" />
+
+
+            </children> 
+        </node>
+
+
+        <node id="body">
+			<transforms>
+				<scale value3="1 0.35 2" />
+            </transforms> 
+
+            <materialref id="bodyApp" />
+
+            <children>             
+                <noderef id="unitCube" />
+            </children> 
+        </node>
+
+        <node id="car">
+
+            <transforms>
+				<translate value3="0 0.0 0" />
+				<scale value3="0.7 0.7 0.7" />
+            </transforms> 
+
+            <children>             
+                <noderef id="body" />
+                <noderef id="roof" />
+                <noderef id="weels" />
+            </children> 
+        </node>
+		
+		
+    </graph> 
+</yaf> 

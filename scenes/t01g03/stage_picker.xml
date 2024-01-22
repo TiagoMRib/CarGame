@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<yaf> 
+	
+    <globals background="0 0 0 1" ambient="0 0 0 1" /> 
+
+
+    <cameras initial="cam1" > 
+        <perspective id="cam6" 
+            angle="60" 
+            near="0.1" 
+            far="1000" 
+            location="15 15 15" 
+            target="0 0.0 0" /> 
+ 
+    </cameras> 
+
+    <skybox size="250 250 250" center="0 0 0" emissive="1 1 1 1.0" intensity="0.25" up="scenes/t01g03/textures/dark_ghost_skybox.jpg" down="scenes/t01g03/textures/dark_ghost_skybox.jpg" left="scenes/t01g03/textures/dark_ghost_skybox.jpg" right="scenes/t01g03/textures/dark_ghost_skybox.jpg" front="scenes/t01g03/textures/dark_ghost_skybox.jpg" back="scenes/t01g03/textures/dark_ghost_skybox.jpg"/>
+
+    
+    <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas --> 
+    <textures>        
+
+    </textures> 
+
+    <materials> 
+
+			
+    </materials> 
+
+    <graph rootid="stagePicker"> 
+		
+		<node id="stagePicker" castshadows = "true" receiveshadows="true"> 
+            <children> 
+                <noderef id="stagefloor" /> 
+            </children> 
+        </node>
+		
+		<node id="stagefloor">
+			<transforms>
+				<translate value3="0 -1.25 0" />
+            </transforms>
+
+            <materialref id="purple2" /> 
+			
+            <children>    
+                <primitive>
+                    <cylinder base="7" top="7" height="2" slices="30" stacks="1" capsclose="true"/>
+                </primitive>
+            </children> 
+        </node>
+
+    </graph> 
+</yaf> 
