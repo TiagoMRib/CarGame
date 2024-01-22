@@ -33,25 +33,25 @@
 
 ### [TP2 - ThreeJS Parser](tp2)
 
-![screenshot2](./screenshots/screenshot1.png)
+![screenshot2](screenshots/screenshot1.png)
 
 - The GUI allows the user to select from the cameras described in the xml file.
 
-![screenshot2](./screenshots/orthocam.png)
+![screenshot2](screenshots/orthocam.png)
 
 - Video Textures and Bump textures implemented
   - Video texture used on the TV
   - Use of bump textures, namely in the gym towel, so that it appears to be more realistic.
 - We have implemented many features to make it easier to render computationally heavy scenes:
   - One example is the use of LOD (level of detail). It's used to render objects based on their distance from the camera. We implement LOD's in the weights, simplifying the shape, in the water bottle, removing the texture and then simplifying the shape too, as well as in the television screen, so it stops showing the video at certain distance
-  ![screenshot2](./screenshots/screenshot2.png)
+  ![screenshot2](screenshots/screenshot2.png)
   - We've implemented Mipmaps in the gym logo panel: when they're enabled, the GPU will use different sized versions of a texture to render a surface, depending on how far it is from the camera.
   - The Buffer Geometry technique, working on a lower level and sending vertices, normals and colors directly to the GPU, was used for rectangles, boxes, spheres, triangles and polygon geometries.
 - Skybox and fog was also implemented
-![skyboxandfog](./screenshots/skyboxandfog.png)
+![skyboxandfog](screenshots/skyboxandfog.png)
 - The GUI has a switch that allows the user to toggle between the "fill" mode and the "wireframe" mode, also facilitating the programmers when debugging.
-![wireframe](./screenshots/wireframe.png)
-![wireframe2](./screenshots/wireframe2.png)
+![wireframe](screenshots/wireframe.png)
+![wireframe2](screenshots/wireframe2.png)
 
 
 - Scene:
@@ -72,18 +72,18 @@
 
 - Use of a parser from YASF language to THREE 3D objects
 - Menu using 3D techiques implemented, with pressable buttons
-![menu](./screenshots/init.png)
-![menu](./screenshots/input.png)
+![menu](screenshots/init.png)
+![menu](screenshots/input.png)
 - A picker using 3D objects where the user can select the cars and obstacles
-![picker](./screenshots/picker.png)
+![picker](screenshots/picker.png)
 - Implementation of a controllable car and an autonomous one that compete in a race where the user can define the number of laps and the speed of the autonomous vehicle.
-![track](./screenshots/track.png)
+![track](screenshots/track.png)
 - Implementation of particles used for fireworks and sprite billboards for the ghost spectators
-![particle](./screenshots/fireworks.png)
+![particle](screenshots/fireworks.png)
 - Use of textual characters for the textual information presented in the menus and outdoors
 - Use of shaders in the lake, clouds and in powerups.
 - The GUI allows the user to change the camera used from over the track to 3rd person view from the car and the cenario's weather.
-![fog](./screenshots/fog.png)
+![fog](screenshots/fog.png)
 - Collision system that not only detects collisions with obstacles and powerups but also prevents the user's car from going against the enemy car or the cenario objects.
 
 - Scene:
