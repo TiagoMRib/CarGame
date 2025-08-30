@@ -98,5 +98,6 @@
 - Issues/Problems:
 
   - We had some difficult in start the game again after the game is over, so we only made a window reload to restart the game.
-  - We don't have time to implement the shader simulating relief, we can't even start trying to implement it.
+  - We didn't have time to implement the shader simulating relief
+
 
